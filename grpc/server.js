@@ -18,28 +18,33 @@ const server = new grpc.Server();
 
 server.addService(productProto.ProductService.service, {
   getAllProducts: (_, cb) => {
+    console.log("getAllProducts");
     cb(null, { products: [...productsData] });
   },
 
   getProduct: (_, cb) => {
+    console.log("getProduct");
     const productId = _.request.id;
     const product = productsData.find(({ id }) => id == productId);
     cb(null, product);
   },
 
   addProduct: (call, cb) => {
+    console.log("addProduct");
     const _product = { id: Date.now(), ...call.request };
     productsData.push(_product);
     cb(null, _product.id);
   },
 
   deleteProduct: (_, cb) => {
+    console.log("deleteProduct");
     const productId = _.request.id;
     productsData = productsData.filter(({ id }) => id !== productId);
     cb(null, {});
   },
 
   editProduct: (_, cb) => {
+    console.log("editProduct");
     const productId = _.request.id;
     const product = productsData.find(({ id }) => id == productId);
     if (product) {
