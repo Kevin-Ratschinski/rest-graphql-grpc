@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Kevin-Ratschinski/rest-graphql-grpc#readme",
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
-    "@grpc/proto-loader": "^0.6.12"
+    "@grpc/proto-loader": "^0.6.12",
+    "axios": "^0.27.2"
   }
 }
