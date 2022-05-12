@@ -1,3 +1,4 @@
+require('dotenv').config();
 const grpc = require("@grpc/grpc-js");
 const path = require('path');
 const protoLoader = require("@grpc/proto-loader");
@@ -15,7 +16,7 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
 const ProductService = grpc.loadPackageDefinition(packageDefinition).ProductService;
 
 const client = new ProductService(
-  "localhost:5000",
+  `localhost:${process.env.GRPC_SERVER_PORT}`,
   grpc.credentials.createInsecure()
 );
 

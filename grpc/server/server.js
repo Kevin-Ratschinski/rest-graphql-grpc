@@ -1,3 +1,4 @@
+require('dotenv').config();
 const grpc = require("@grpc/grpc-js");
 const path = require('path');
 const protoLoader = require("@grpc/proto-loader");
@@ -56,7 +57,7 @@ server.addService(productProto.ProductService.service, {
   },
 });
 
-server.bindAsync("localhost:5000", grpc.ServerCredentials.createInsecure(), (error, port) => {
+server.bindAsync(`localhost:${process.env.GRPC_SERVER_PORT}`, grpc.ServerCredentials.createInsecure(), (error, port) => {
   if (error) {
     console.log(error);
   } else {
