@@ -1,31 +1,17 @@
 const { Router } = require('express');
 
-let users = require('../../../data/users.json');
+const userController = require('../controller/user.controller');
 
 const router = Router();
 
-router.get('/users', (req, res) => {
-  return res.json(users);
-});
+router.get('/users', userController.getUsers);
 
-router.get('/user/:id', (req, res) => {
-  const userId = req.params.id;
+router.get('/user/:id', userController.getUser);
 
-  return res.json(users[userId]);
-});
+router.post('/user', userController.createUser);
 
-router.post('/user', (req, res) => {
-  return res.json('Received a POST HTTP method');
-});
+router.put('/user/:id', userController.updateUser);
 
-router.put('/user/:id', (req, res) => {
-  const userId = req.params.id;
-  return res.json('Received a PUT HTTP method');
-});
-
-router.delete('/user/:id', (req, res) => {
-  const userId = req.params.id;
-  return res.json('Received a DELETE HTTP method');
-});
+router.delete('/user/:id', userController.deleteUser);
 
 module.exports = router;
