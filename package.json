@@ -8,7 +8,11 @@
     "start-grpc-client": "node grpc/client/index.js",
     "start-rest-server": "node rest/server/server.js",
     "start-rest-client": "node rest/client/index.js",
-    "start-dev": "nodemon rest/server/server.js"
+    "start-graphql-server": "node graphql/server/server.js",
+    "start-graphql-client": "node graphql/client/index.js",
+    "start-dev-grpc": "nodemon grpc/server/server.js",
+    "start-dev-rest": "nodemon rest/server/server.js",
+    "start-dev-graphql": "nodemon graphql/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
