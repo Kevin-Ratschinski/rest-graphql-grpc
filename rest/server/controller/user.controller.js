@@ -1,4 +1,4 @@
-let users = require('../../../data/users.json');
+let users = require('../../../data/users_data.json');
 
 function getUsers(req, res, next) {
   return res.json(users);
@@ -6,7 +6,7 @@ function getUsers(req, res, next) {
 
 function getUser(req, res, next) {
   const userId = req.params.id;
-  const user = users.find((user) => user.id === userId);
+  const user = users.find((user) => user.id == userId);
 
   return res.json(user);
 }
@@ -14,15 +14,20 @@ function getUser(req, res, next) {
 function createUser(req, res, next) {
   let userId;
   if (users.length > 0) {
-    userId = (+users[users.length - 1].id + 1).toString();
+    userId = +users[users.length - 1].id + 1;
   } else {
-    userId = '1';
+    userId = 1;
   }
-  const username = req.body.username;
+
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
 
   const user = {
     id: userId,
-    username: username,
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
   };
 
   users.push(user);
@@ -32,12 +37,16 @@ function createUser(req, res, next) {
 
 function updateUser(req, res, next) {
   const userId = req.params.id;
-  const newUsername = req.body.username;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
 
-  const user = users.find((user) => user.id === userId);
+  const user = users.find((user) => user.id == userId);
 
   if (user) {
-    user.username = newUsername;
+    user.first_name = firstName;
+    user.last_name = lastName;
+    user.email = email;
   }
 
   return res.json(user);
@@ -47,10 +56,10 @@ function deleteUser(req, res, next) {
   const userId = req.params.id;
 
   users = users.filter((user) => {
-    return user.id !== userId;
+    return user.id != userId;
   });
 
-  return res.json(`Delete user with id:${userId}`);
+  return res.json(`Delete user with id: ${userId}`);
 }
 
 module.exports = {

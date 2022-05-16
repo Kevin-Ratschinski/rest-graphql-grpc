@@ -1,6 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
-
-let messages = require('../../../data/messages.json');
+let messages = require('../../../data/messages_data.json');
 
 function getMessages(req, res, next) {
   return res.json(messages);
@@ -8,15 +6,21 @@ function getMessages(req, res, next) {
 
 function getMessage(req, res, next) {
   const messageId = req.params.id;
-  const message = messages.find((message) => message.id === messageId);
+  const message = messages.find((message) => message.id == messageId);
 
   return res.json(message);
 }
 
 function createMessage(req, res, next) {
-  const id = uuidv4();
+  let messageId;
+  if (messages.length > 0) {
+    messageId = +messages[messages.length - 1].id + 1;
+  } else {
+    messageId = 1;
+  }
+
   const message = {
-    id,
+    id: messageId,
     text: req.body.text,
     userId: req.body.userId,
   };
@@ -30,7 +34,7 @@ function updateMessage(req, res, next) {
   const messageId = req.params.id;
   const newText = req.body.text;
 
-  const message = messages.find((message) => message.id === messageId);
+  const message = messages.find((message) => message.id == messageId);
 
   if (message) {
     message.text = newText;
@@ -43,10 +47,10 @@ function deleteMessage(req, res, next) {
   const messageId = req.params.id;
 
   messages = messages.filter((message) => {
-    return message.id !== messageId;
+    return message.id != messageId;
   });
 
-  return res.json(`Delete message with id:${messageId}`);
+  return res.json(`Delete message with id: ${messageId}`);
 }
 
 module.exports = {
