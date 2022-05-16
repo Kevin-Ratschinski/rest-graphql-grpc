@@ -7,6 +7,7 @@
     "start-grpc-server": "node grpc/server/server.js",
     "start-grpc-client": "node grpc/client/index.js",
     "start-rest-server": "node rest/server/server.js",
+    "start-rest-client": "node rest/client/index.js",
     "start-dev": "nodemon rest/server/server.js"
   },
   "repository": {
