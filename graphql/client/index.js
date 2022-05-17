@@ -6,16 +6,13 @@ axios({
   data: {
     query: `
     {
-      article(id: 2) {
-        name
-        topic
-        date
-        contributorId
-        contributor {
-          name
-          articles {
-            name
-          }
+      user(id: 172) {
+        id
+        first_name
+        messages {
+          id
+          userId
+          text
         }
       }
     }
