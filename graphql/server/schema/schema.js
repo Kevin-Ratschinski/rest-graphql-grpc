@@ -1,3 +1,4 @@
+'use strict';
 const graphql = require('graphql');
 const {
   GraphQLObjectType,
@@ -7,74 +8,35 @@ const {
   GraphQLSchema,
 } = graphql;
 
-let articles = [
-  {
-    name: 'The History of Node.js',
-    topic: 'Node.js',
-    date: '2020-08-25T00:00:00Z',
-    id: '1',
-    contributorId: '1',
-  },
-  {
-    name: 'Understanding Docker Concepts',
-    topic: 'Containers',
-    date: '2020-07-23T00:00:00Z',
-    id: '2',
-    contributorId: '2',
-  },
-  {
-    name: 'Linting in Node.js using ESLint',
-    topic: 'Node.js',
-    date: '2020-08-24T00:00:00Z',
-    id: '3',
-    contributorId: '2',
-  },
-  {
-    name: 'REST APIs - Introductory guide',
-    topic: 'API',
-    date: '2020-06-26T00:00:00Z',
-    id: '4',
-    contributorId: '1',
-  },
-];
+let usersData = require('../../../data/users_data.json');
+let messagesData = require('../../../data/messages_data.json');
 
-let contributors = [
-  { name: 'John Doe', url: '/john-doe', major: 'Computer Science', id: '1' },
-  { name: 'Jane Doe', url: '/jane-doe', major: 'Physics', id: '2' },
-];
-
-const ArticleType = new GraphQLObjectType({
-  name: 'Article',
+const UserType = new GraphQLObjectType({
+  name: 'User',
   fields: () => ({
     id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    topic: { type: GraphQLString },
-    date: { type: GraphQLString },
-    contributorId: { type: GraphQLID },
-    contributor: {
-      type: ContributorType,
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    messages: {
+      type: new GraphQLList(MessageType),
       resolve(parent, args) {
-        return contributors.find(
-          (contributor) => contributor.id === parent.contributorId
-        );
+        return messagesData.filter((message) => message.userId === parent.id);
       },
     },
   }),
 });
 
-const ContributorType = new GraphQLObjectType({
-  name: 'Contributor',
+const MessageType = new GraphQLObjectType({
+  name: 'Message',
   fields: () => ({
     id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    url: { type: GraphQLString },
-    major: { type: GraphQLString },
-    articles: {
-      type: new GraphQLList(ArticleType),
+    text: { type: GraphQLString },
+    userId: { type: GraphQLID },
+    user: {
+      type: UserType,
       resolve(parent, args) {
-        return articles.filter(
-          (article) => article.contributorId === parent.id
-        );
+        return usersData.find((user) => user.id === parent.userId);
       },
     },
   }),
@@ -83,24 +45,18 @@ const ContributorType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    status: {
-      type: GraphQLString,
-      resolve(parent, args) {
-        return 'Welcome to GraphQL';
-      },
-    },
-    article: {
-      type: ArticleType,
+    user: {
+      type: UserType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return articles.find((article) => article.id === args.id);
+        return usersData.find((user) => user.id == args.id);
       },
     },
-    contributor: {
-      type: ContributorType,
+    message: {
+      type: MessageType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return contributors.find((contributor) => contributor.id === args.id);
+        return messagesData.find((message) => message.id == args.id);
       },
     },
   },
