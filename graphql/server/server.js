@@ -1,20 +1,33 @@
+'use strict';
+
 require('dotenv').config();
+const { ApolloServer } = require('apollo-server-express');
+const cors = require('cors');
 const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema/schema');
 
 const app = express();
 
-app.use(
-  '/graphql',
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true,
-  })
-);
+app.use(cors());
 
+const schema = require('./schema');
+const resolvers = require('./resolver');
+
+const server = new ApolloServer({
+  typeDefs: schema,
+  resolvers,
+});
+
+const address = process.env.GRAPHQL_SERVER_ADDRESS || 'localhost';
 const port = process.env.GRAPHQL_SERVER_PORT || 5002;
 
-app.listen(port, () => {
-  console.log(`now listening for requests on port ${port}`);
-});
+async function startServer() {
+  await server.start();
+
+  server.applyMiddleware({ app, path: '/graphql' });
+
+  app.listen(port, address, () =>
+    console.log(`GraphQl Server listening on ${address}:${port}`)
+  );
+}
+
+startServer();
