@@ -16,5 +16,9 @@ app.use(express.json());
 app.use(userRoutes);
 app.use(messageRoutes);
 
+const address = process.env.REST_SERVER_ADDRESS || 'localhost';
 const port = process.env.REST_SERVER_PORT || 5001;
-app.listen(port, () => console.log(`REST Server listening on port: ${port}`));
+
+app.listen(port, address, () =>
+  console.log(`REST Server listening on ${address}:${port}`)
+);
