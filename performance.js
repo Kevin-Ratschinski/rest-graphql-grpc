@@ -54,9 +54,34 @@ const performanceGRPC = async () => {
   performance.measure(`gRPC http://localhost:5000`, 'grpc-start', 'grpc-end');
 };
 
+const performanceGRPCAsync = async () => {
+  let count = 0;
+  try {
+    performance.mark('grpc-start');
+    for (let i = 1; i <= REQUEST_COUNT; i++) {
+      getAllUsers({}).then(() => {
+        count++;
+
+        if (count == REQUEST_COUNT) {
+          performance.mark('grpc-end');
+
+          performance.measure(
+            `gRPC async http://localhost:5000`,
+            'grpc-start',
+            'grpc-end'
+          );
+        }
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 (async () => {
   await performanceRest('/users');
-  await performanceRest('/user/1');
-  await performanceRest('/messages');
+  //await performanceRest('/user/1');
+  //await performanceRest('/messages');
   await performanceGRPC();
+  await performanceGRPCAsync();
 })();
