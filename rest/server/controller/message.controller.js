@@ -11,6 +11,13 @@ function getMessage(req, res, next) {
   return res.json(message);
 }
 
+function getUserMessages(req, res, next) {
+  const userId = req.params.userId;
+  const userMessages = messages.filter((message) => message.userId == userId);
+
+  return res.json(userMessages);
+}
+
 function createMessage(req, res, next) {
   let messageId;
   if (messages.length > 0) {
@@ -56,6 +63,7 @@ function deleteMessage(req, res, next) {
 module.exports = {
   getMessages: getMessages,
   getMessage: getMessage,
+  getUserMessages: getUserMessages,
   createMessage: createMessage,
   updateMessage: updateMessage,
   deleteMessage: deleteMessage,
