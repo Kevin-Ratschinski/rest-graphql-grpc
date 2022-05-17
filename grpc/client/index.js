@@ -1,56 +1,130 @@
-const client = require("./client");
+const client = require('./client');
 
-getProducts();
-
-// add a product
-client.addProduct(
+// add a user
+client.addUser(
   {
-    name: "New Product",
-    price: 10.99,
+    first_name: 'first name',
+    last_name: 'last name',
+    email: 'email@email.com',
   },
-  (error, product) => {
+  (error, user) => {
     if (error) throw error;
-    console.log("Successfully added a product.");
+    console.log('Successfully added a user.');
   }
 );
 
-getProducts();
-
-// edit a news
-client.editProduct(
+// edit a User
+client.editUser(
   {
     id: 2,
-    name: "Product 2 edited.",
-    price: 8.99
+    first_name: 'edit first name',
+    last_name: 'edit last name',
+    email: 'edit@email.com',
   },
-  (error, product) => {
+  (error, user) => {
     if (error) throw error;
-    console.log("Successfully edited a product.");
+    console.log('Successfully edited a user.');
   }
 );
 
-getProducts();
-
-// delete a news
-client.deleteProduct(
+// delete a user
+client.deleteUser(
   {
-    id: 2,
+    id: 3,
   },
-  (error, product) => {
+  (error, user) => {
     if (error) throw error;
-    console.log("Successfully deleted a product.");
+    console.log('Successfully deleted a user.');
   }
 );
 
-getProducts();
-
-
-function getProducts() {
-  client.getAllProducts({}, (error, products) => {
+client.getUser(
+  {
+    id: 1,
+  },
+  (error, user) => {
     if (error) {
       console.log(error);
     } else {
-      console.log(products);
+      console.log(user);
     }
-  });
-}
+  }
+);
+
+client.getAllUsers({}, (error, users) => {
+  if (error) {
+    console.log(error);
+  } else {
+    //console.log(users);
+  }
+});
+
+// add a message
+client.addMessage(
+  {
+    text: 'Lorem Ipsum',
+    userId: 3,
+  },
+  (error, message) => {
+    if (error) throw error;
+    console.log('Successfully added a message.');
+  }
+);
+
+// edit a Message
+client.editMessage(
+  {
+    id: 2,
+    text: 'Edit Lorem Ipsum',
+    userId: 3,
+  },
+  (error, message) => {
+    if (error) throw error;
+    console.log('Successfully edited a message.');
+  }
+);
+
+// delete a message
+client.deleteMessage(
+  {
+    id: 3,
+  },
+  (error, message) => {
+    if (error) throw error;
+    console.log('Successfully deleted a message.');
+  }
+);
+
+client.getMessage(
+  {
+    id: 1,
+  },
+  (error, message) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(message);
+    }
+  }
+);
+
+client.getUserMessages(
+  {
+    id: 172,
+  },
+  (error, messages) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(messages);
+    }
+  }
+);
+
+client.getAllMessages({}, (error, messages) => {
+  if (error) {
+    console.log(error);
+  } else {
+    //console.log(users);
+  }
+});

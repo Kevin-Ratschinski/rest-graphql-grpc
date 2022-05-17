@@ -1,11 +1,11 @@
 require('dotenv').config();
-const grpc = require("@grpc/grpc-js");
+const grpc = require('@grpc/grpc-js');
 const path = require('path');
-const protoLoader = require("@grpc/proto-loader");
+const protoLoader = require('@grpc/proto-loader');
 
-const PROTO_PATH = path.join(__dirname, "../product.proto");
+const USER_PROTO_PATH = path.join(__dirname, '../user.proto');
 
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+const packageDefinition = protoLoader.loadSync(USER_PROTO_PATH, {
   keepCase: true,
   longs: String,
   enums: String,
@@ -13,10 +13,13 @@ const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   oneofs: true,
 });
 
-const ProductService = grpc.loadPackageDefinition(packageDefinition).ProductService;
+const UserService = grpc.loadPackageDefinition(packageDefinition).UserService;
 
-const client = new ProductService(
-  `localhost:${process.env.GRPC_SERVER_PORT}`,
+const address = process.env.GRPC_SERVER_ADDRESS;
+const port = process.env.GRPC_SERVER_PORT;
+
+const client = new UserService(
+  `${address}:${port}`,
   grpc.credentials.createInsecure()
 );
 

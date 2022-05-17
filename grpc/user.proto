@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+service UserService {
+  rpc GetUser(Id) returns (User) {}
+  rpc GetAllUsers (Empty) returns (UserList) {}
+  rpc AddUser(User) returns (Id) {}
+  rpc DeleteUser (Id) returns (Empty) {}
+  rpc EditUser (User) returns (User) {}
+  rpc GetMessage(Id) returns (Message) {}
+  rpc GetAllMessages (Empty) returns (MessageList) {}
+  rpc GetUserMessages (Id) returns (MessageList) {}
+  rpc AddMessage(Message) returns (Id) {}
+  rpc DeleteMessage (Id) returns (Empty) {}
+  rpc EditMessage (Message) returns (Message) {}
+}
+
+message User {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+}
+
+message Message {
+  int64 id = 1;
+  string text = 2;
+  int64 userId = 3;
+}
+
+message Id {
+  string id = 1;
+}
+
+message Empty {}
+
+message UserList {
+  repeated User users = 1;
+}
+
+message MessageList {
+  repeated Message messages = 1;
+}
