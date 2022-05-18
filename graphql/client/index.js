@@ -1,7 +1,15 @@
+'use strict';
+
+require('dotenv').config();
 const axios = require('axios');
 
+const address = process.env.GRAPHQL_SERVER_ADDRESS || 'localhost';
+const port = process.env.GRAPHQL_SERVER_PORT || 5002;
+
+const GRAPHQL_SERVER = `http://${address}:${port}/graphql`;
+
 axios({
-  url: 'http://localhost:5002/graphql',
+  url: GRAPHQL_SERVER,
   method: 'post',
   data: {
     query: `

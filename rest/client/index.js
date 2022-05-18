@@ -1,10 +1,13 @@
+'use strict';
+
+require('dotenv').config();
 const axios = require('axios');
-const http = require('http');
 
-http.globalAgent.keepAlive = true;
+const REQUEST_COUNT = 100;
+const address = process.env.REST_SERVER_ADDRESS || 'localhost';
+const port = process.env.REST_SERVER_PORT || 5001;
 
-const REQUEST_COUNT = process.env.REQUEST_COUNT || 10;
-const REST_SERVER = 'http://localhost:5001';
+const REST_SERVER = `http://${address}:${port}`;
 
 const benchmark = async (endpoint) => {
   const startTime = process.hrtime();
@@ -13,7 +16,7 @@ const benchmark = async (endpoint) => {
   }
   const endTime = process.hrtime(startTime);
   console.log(
-    `Done ${REQUEST_COUNT.toLocaleString()} ${endpoint} in ${endTime[0]} s ${(
+    `Done ${REQUEST_COUNT.toString()} ${endpoint} in ${endTime[0]} s ${(
       endTime[1] / 1e6
     ).toFixed(4)} ms`
   );
