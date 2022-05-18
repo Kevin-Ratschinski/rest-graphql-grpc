@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').config();
 const grpc = require('@grpc/grpc-js');
 const path = require('path');
@@ -5,8 +7,8 @@ const protoLoader = require('@grpc/proto-loader');
 
 const USER_PROTO_PATH = path.join(__dirname, '../user.proto');
 
-usersData = require('../../data/users_data.json');
-messagesData = require('../../data/messages_data.json');
+let usersData = require('../../data/users_data.json');
+let messagesData = require('../../data/messages_data.json');
 
 const packageDefinition = protoLoader.loadSync(USER_PROTO_PATH, {
   keepCase: true,

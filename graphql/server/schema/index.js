@@ -1,3 +1,5 @@
+'use strict';
+
 const { gql } = require('apollo-server-express');
 
 const userSchema = require('./user');

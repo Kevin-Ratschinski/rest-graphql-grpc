@@ -1,3 +1,5 @@
+'use strict';
+
 let users = require('../../../data/users_data.json');
 
 function getUsers(req, res, next) {

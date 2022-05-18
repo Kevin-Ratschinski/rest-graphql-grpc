@@ -1,3 +1,5 @@
+'use strict';
+
 const userResolvers = require('./user');
 const messageResolvers = require('./message');
 

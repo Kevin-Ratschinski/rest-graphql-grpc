@@ -1,3 +1,5 @@
+'use strict';
+
 let users = require('../../../data/users_data.json');
 let messages = require('../../../data/messages_data.json');
 

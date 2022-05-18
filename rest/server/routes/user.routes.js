@@ -1,3 +1,5 @@
+'use strict';
+
 const { Router } = require('express');
 
 const userController = require('../controller/user.controller');

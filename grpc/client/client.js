@@ -1,3 +1,5 @@
+'use strict';
+
 require('dotenv').config();
 const grpc = require('@grpc/grpc-js');
 const path = require('path');

@@ -1,3 +1,5 @@
+'use strict';
+
 let messages = require('../../../data/messages_data.json');
 
 function getMessages(req, res, next) {
