@@ -8,6 +8,7 @@ const messageSchema = gql`
 
   extend type Mutation {
     createMessage(text: String!, userId: ID!): Message!
+    updateMessage(id: ID!, text: String!): Message!
     deleteMessage(id: ID!): Boolean!
   }
 

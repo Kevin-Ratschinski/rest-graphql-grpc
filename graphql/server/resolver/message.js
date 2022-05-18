@@ -30,6 +30,18 @@ const messageResolvers = {
 
       return message;
     },
+    updateMessage: (parent, { id, text }) => {
+      const messageId = id;
+      const newText = text;
+
+      const message = messages.find((message) => message.id == messageId);
+
+      if (message) {
+        message.text = newText;
+      }
+
+      return message;
+    },
     deleteMessage: (parent, { id }) => {
       const message = messages.find((message) => message.id == id);
       if (!message) {
