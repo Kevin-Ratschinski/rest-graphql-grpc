@@ -41,9 +41,9 @@ server.addService(userProto.UserService.service, {
       userId = 1;
     }
 
-    const user = { id: userId, ..._.request };
+    const user = { ..._.request, id: userId };
     usersData.push(user);
-    cb(null, user.id);
+    cb(null, { id: user.id });
   },
 
   deleteUser: (_, cb) => {
@@ -54,12 +54,24 @@ server.addService(userProto.UserService.service, {
 
   editUser: (_, cb) => {
     const userId = _.request.id;
+    const first_name = _.request.first_name;
+    const last_name = _.request.last_name;
+    const email = _.request.email;
+
     const user = usersData.find(({ id }) => id == userId);
+
     if (user) {
-      user.first_name = _.request.first_name;
-      user.last_name = _.request.last_name;
-      user.email = _.request.email;
+      if (first_name) {
+        user.first_name = first_name;
+      }
+      if (last_name) {
+        user.last_name = last_name;
+      }
+      if (email) {
+        user.email = email;
+      }
     }
+
     cb(null, user);
   },
 
@@ -87,9 +99,9 @@ server.addService(userProto.UserService.service, {
       messageId = 1;
     }
 
-    const message = { id: messageId, ..._.request };
+    const message = { ..._.request, id: messageId };
     messagesData.push(message);
-    cb(null, message.id);
+    cb(null, { id: message.id });
   },
 
   deleteMessage: (_, cb) => {
