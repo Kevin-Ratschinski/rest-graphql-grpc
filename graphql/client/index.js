@@ -1,39 +1,33 @@
 'use strict';
 
 const graphqlClient = require('./graphqlClient');
-const { gql } = require('graphql-request');
+const queries = require('../performance/queries');
 
 (async () => {
-  const query = gql`
-    query getUser($id: ID!) {
-      user(id: $id) {
-        id
-        first_name
-        last_name
-        messages {
-          text
-        }
-      }
-    }
-  `;
-
-  let variablesQuery = {
-    id: 172,
-  };
-
-  const mutation = gql`
-    mutation deleteUser($id: ID!) {
-      deleteUser(id: $id)
-    }
-  `;
-
-  let variablesMutation = {
-    id: 1,
-  };
-
-  let data = await graphqlClient.request(query, variablesQuery);
+  let data = await graphqlClient.request(queries.getUser, { id: 172 });
   console.log(data);
 
-  data = await graphqlClient.request(mutation, variablesMutation);
+  data = await graphqlClient.request(queries.getMessage, { id: 172 });
+  console.log(data);
+
+  data = await graphqlClient.request(queries.getMessagesFromUser, { id: 172 });
+  console.log(data);
+
+  data = await graphqlClient.request(queries.createUser, {
+    first_name: 'first name',
+    last_name: 'last name',
+    email: 'email',
+  });
+  console.log(data);
+
+  data = await graphqlClient.request(queries.updateUser, {
+    id: 29,
+    first_name: 'first name',
+    last_name: 'last name',
+    email: 'email',
+  });
+  console.log(data);
+
+  data = await graphqlClient.request(queries.deleteUser, { id: 13 });
   console.log(data);
 })();
