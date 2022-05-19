@@ -10,6 +10,7 @@
     "start-rest-client": "node rest/client/index.js",
     "start-graphql-server": "node graphql/server/server.js",
     "start-graphql-client": "node graphql/client/index.js",
+    "graphql-performance": "node graphql/performance",
     "start-dev-grpc": "nodemon grpc/server/server.js",
     "start-dev-rest": "nodemon rest/server/server.js",
     "start-dev-graphql": "nodemon graphql/server/server.js"
