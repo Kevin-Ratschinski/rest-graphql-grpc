@@ -112,10 +112,14 @@ server.addService(userProto.UserService.service, {
 
   editMessage: (_, cb) => {
     const messageId = _.request.id;
+    const messageText = _.request.text;
+
     const message = messagesData.find(({ id }) => id == messageId);
+
     if (message) {
-      message.text = _.request.text;
+      message.text = messageText;
     }
+
     cb(null, message);
   },
 });
