@@ -53,11 +53,6 @@ const performanceGraphQL = async (query, variables, description) => {
   await performanceGraphQL(query.getMessage, { id: 1 }, 'Get Message');
   await performanceGraphQL(query.getMessages, {}, 'Get all Messages');
   await performanceGraphQL(
-    query.getMessagesFromUser,
-    { id: 172 },
-    'Get Messages from User'
-  );
-  await performanceGraphQL(
     query.getMessagesFromUsers,
     {},
     'Get Messages from all Users'
