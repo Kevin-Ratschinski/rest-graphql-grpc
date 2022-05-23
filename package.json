@@ -6,6 +6,7 @@
   "scripts": {
     "start-grpc-server": "node grpc/server/server.js",
     "start-grpc-client": "node grpc/client/index.js",
+    "grpc-performance": "node grpc/performance",
     "start-rest-server": "node rest/server/server.js",
     "start-rest-client": "node rest/client/index.js",
     "start-graphql-server": "node graphql/server/server.js",
