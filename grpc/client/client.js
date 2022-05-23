@@ -22,7 +22,11 @@ const port = process.env.GRPC_SERVER_PORT;
 
 const client = new UserService(
   `${address}:${port}`,
-  grpc.credentials.createInsecure()
+  grpc.credentials.createInsecure(),
+  {
+    'grpc.max_send_message_length': -1,
+    'grpc.max_receive_message_length': -1,
+  }
 );
 
 module.exports = client;
