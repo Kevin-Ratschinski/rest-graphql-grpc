@@ -20,7 +20,9 @@ const packageDefinition = protoLoader.loadSync(USER_PROTO_PATH, {
 
 const userProto = grpc.loadPackageDefinition(packageDefinition);
 
-const server = new grpc.Server();
+const server = new grpc.Server({
+  'grpc-node.max_session_memory': 15,
+});
 
 server.addService(userProto.UserService.service, {
   getAllUsers: (_, cb) => {
