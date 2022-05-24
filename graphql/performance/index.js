@@ -28,23 +28,21 @@ const address = process.env.GRAPHQL_SERVER_ADDRESS;
 const port = process.env.GRAPHQL_SERVER_PORT;
 
 const performanceGraphQL = async (query, variables, description) => {
-  {
-    try {
-      performance.mark('graphql-start');
-      for (let i = 1; i <= REQUEST_COUNT; i++) {
-        await graphqlClient.request(query, variables);
-      }
-    } catch (error) {
-      console.log(error);
+  try {
+    performance.mark('graphql-start');
+    for (let i = 1; i <= REQUEST_COUNT; i++) {
+      await graphqlClient.request(query, variables);
     }
-    performance.mark('graphql-end');
-
-    performance.measure(`http://${address}:${port}`, {
-      start: 'graphql-start',
-      end: 'graphql-end',
-      detail: description,
-    });
+  } catch (error) {
+    console.log(error);
   }
+  performance.mark('graphql-end');
+
+  performance.measure(`http://${address}:${port}`, {
+    start: 'graphql-start',
+    end: 'graphql-end',
+    detail: description,
+  });
 };
 
 (async () => {

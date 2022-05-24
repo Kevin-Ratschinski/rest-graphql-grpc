@@ -31,54 +31,50 @@ const address = process.env.GRPC_SERVER_ADDRESS;
 const port = process.env.GRPC_SERVER_PORT;
 
 const performanceGRPC = async (description, clientFunction) => {
-  {
-    try {
-      performance.mark('grpc-start');
-      const promises = [];
-      for (let i = 1; i <= REQUEST_COUNT; i++) {
-        promises.push(clientFunction());
-      }
-      await Promise.all(promises).then(() => {
-        performance.mark('grpc-end');
-
-        performance.measure(`http://${address}:${port}`, {
-          start: 'grpc-start',
-          end: 'grpc-end',
-          detail: description,
-        });
-      });
-    } catch (error) {
-      console.log(error);
+  try {
+    performance.mark('grpc-start');
+    const promises = [];
+    for (let i = 1; i <= REQUEST_COUNT; i++) {
+      promises.push(clientFunction());
     }
+    await Promise.all(promises).then(() => {
+      performance.mark('grpc-end');
+
+      performance.measure(`http://${address}:${port}`, {
+        start: 'grpc-start',
+        end: 'grpc-end',
+        detail: description,
+      });
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 
 const performanceGRPCMessagesFromUsers = async (description) => {
-  {
-    try {
-      performance.mark('grpc-start');
-      const promises = [];
-      /* for (let i = 1; i <= REQUEST_COUNT; i++) { */
-      const users = await userClient.getAllUsers();
+  try {
+    performance.mark('grpc-start');
+    const promises = [];
+    /* for (let i = 1; i <= REQUEST_COUNT; i++) { */
+    const users = await userClient.getAllUsers();
 
-      for (const key in users.users) {
-        const userId = users.users[key].id;
-        promises.push(messageClient.getUserMessages(userId));
-      }
-      /* } */
-      await Promise.all(promises).then(() => {
-        REQUEST_COUNT = 1;
-        performance.mark('grpc-end');
-
-        performance.measure(`http://${address}:${port}`, {
-          start: 'grpc-start',
-          end: 'grpc-end',
-          detail: description,
-        });
-      });
-    } catch (error) {
-      console.log(error);
+    for (const key in users.users) {
+      const userId = users.users[key].id;
+      promises.push(messageClient.getUserMessages(userId));
     }
+    /* } */
+    await Promise.all(promises).then(() => {
+      REQUEST_COUNT = 1;
+      performance.mark('grpc-end');
+
+      performance.measure(`http://${address}:${port}`, {
+        start: 'grpc-start',
+        end: 'grpc-end',
+        detail: description,
+      });
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 
