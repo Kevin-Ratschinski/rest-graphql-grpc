@@ -128,8 +128,8 @@ server.addService(userProto.UserService.service, {
   },
 });
 
-const address = process.env.GRPC_SERVER_ADDRESS;
-const port = process.env.GRPC_SERVER_PORT;
+const address = process.env.GRPC_SERVER_ADDRESS || 'localhost';
+const port = process.env.GRPC_SERVER_PORT || 5000;
 
 server.bindAsync(
   `${address}:${port}`,

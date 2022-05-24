@@ -23,8 +23,8 @@ const observer = new PerformanceObserver((list) => {
 
 observer.observe({ entryTypes: ['measure'], buffer: true });
 
-const address = process.env.REST_SERVER_ADDRESS;
-const port = process.env.REST_SERVER_PORT;
+const address = process.env.REST_SERVER_ADDRESS || 'localhost';
+const port = process.env.REST_SERVER_PORT || 5001;
 
 const performanceRest = async (endpoint, description) => {
   try {

@@ -17,8 +17,8 @@ const packageDefinition = protoLoader.loadSync(USER_PROTO_PATH, {
 
 const UserService = grpc.loadPackageDefinition(packageDefinition).UserService;
 
-const address = process.env.GRPC_SERVER_ADDRESS;
-const port = process.env.GRPC_SERVER_PORT;
+const address = process.env.GRPC_SERVER_ADDRESS || 'localhost';
+const port = process.env.GRPC_SERVER_PORT || 5000;
 
 const client = new UserService(
   `${address}:${port}`,

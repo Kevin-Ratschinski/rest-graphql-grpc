@@ -24,8 +24,8 @@ const observer = new PerformanceObserver((list) => {
 
 observer.observe({ entryTypes: ['measure'], buffer: true });
 
-const address = process.env.GRAPHQL_SERVER_ADDRESS;
-const port = process.env.GRAPHQL_SERVER_PORT;
+const address = process.env.GRAPHQL_SERVER_ADDRESS || 'localhost';
+const port = process.env.GRAPHQL_SERVER_PORT || 5002;
 
 const performanceGraphQL = async (query, variables, description) => {
   try {
