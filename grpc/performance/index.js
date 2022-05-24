@@ -55,16 +55,14 @@ const performanceGRPCMessagesFromUsers = async (description) => {
   try {
     performance.mark('grpc-start');
     const promises = [];
-    /* for (let i = 1; i <= REQUEST_COUNT; i++) { */
     const users = await userClient.getAllUsers();
 
     for (const key in users.users) {
       const userId = users.users[key].id;
       promises.push(messageClient.getUserMessages(userId));
     }
-    /* } */
     await Promise.all(promises).then(() => {
-      REQUEST_COUNT = 1;
+      REQUEST_COUNT = 1001;
       performance.mark('grpc-end');
 
       performance.measure(`http://${address}:${port}`, {
