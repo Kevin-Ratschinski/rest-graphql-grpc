@@ -9,6 +9,7 @@
     "grpc-performance": "node grpc/performance",
     "start-rest-server": "node rest/server/server.js",
     "start-rest-client": "node rest/client/index.js",
+    "rest-performance": "node rest/performance",
     "start-graphql-server": "node graphql/server/server.js",
     "start-graphql-client": "node graphql/client/index.js",
     "graphql-performance": "node graphql/performance",
