@@ -9,10 +9,7 @@
     "rest-server": "node rest/server/server.js",
     "rest-performance": "node rest/performance",
     "graphql-server": "node graphql/server/server.js",
-    "graphql-performance": "node graphql/performance",
-    "start-dev-grpc": "nodemon grpc/server/server.js",
-    "start-dev-rest": "nodemon rest/server/server.js",
-    "start-dev-graphql": "nodemon graphql/server/server.js"
+    "graphql-performance": "node graphql/performance"
   },
   "repository": {
     "type": "git",
