@@ -9,7 +9,7 @@ let REQUEST_COUNT = process.env.REQUEST_COUNT || 100;
 const observer = new PerformanceObserver((list) => {
   list.getEntries().forEach((entry) => {
     const result = {
-      Measure: `${entry.detail} from ${entry.name}`,
+      Measure: `${entry.detail} ${entry.name}`,
       Requests: +REQUEST_COUNT,
       DurationMs: +entry.duration.toFixed(4),
       DurationSec: +(entry.duration / 1000).toFixed(4),
@@ -65,10 +65,35 @@ const performanceRestMessagesFromUsers = async (description) => {
   });
 };
 
+const performanceRestCreateUser = async (endpoint, description) => {
+  REQUEST_COUNT = process.env.REQUEST_COUNT || 100;
+
+  try {
+    performance.mark('rest-start');
+    for (let i = 1; i <= REQUEST_COUNT; i++) {
+      await axios.post(`http://${address}:${port}${endpoint}`, {
+        firstName: 'test',
+        lastName: 'test',
+        email: 'test@test.com',
+      });
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+  performance.mark('rest-end');
+
+  performance.measure(`REST http://${address}:${port}${endpoint}`, {
+    start: 'rest-start',
+    end: 'rest-end',
+    detail: description,
+  });
+};
+
 (async () => {
   await performanceRest('/users', 'Get all Users');
   await performanceRest('/user/1', 'Get User');
   await performanceRest('/messages', 'Get all Messages');
   await performanceRest('/message/1', 'Get Messages');
   await performanceRestMessagesFromUsers('Get Messages from all Users');
+  //await performanceRestCreateUser('/user', 'Create a User');
 })();

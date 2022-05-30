@@ -13,7 +13,7 @@ const userClient = new UserClient();
 const observer = new PerformanceObserver((list) => {
   list.getEntries().forEach((entry) => {
     const result = {
-      Measure: `${entry.detail} from ${entry.name}`,
+      Measure: `${entry.detail} ${entry.name}`,
       Requests: +REQUEST_COUNT,
       DurationMs: +entry.duration.toFixed(4),
       DurationSec: +(entry.duration / 1000).toFixed(4),
@@ -82,4 +82,8 @@ const performanceGRPCMessagesFromUsers = async (description) => {
   await performanceGRPC('Get all Messages', messageClient.getAllMessages);
   await performanceGRPC('Get Messages', messageClient.getMessage.bind(null, 1));
   await performanceGRPCMessagesFromUsers('Get Messages from all Users');
+  /*  await performanceGRPC(
+    'Create a User',
+    userClient.addUser.bind(null, 'test', 'test', 'test@test.com')
+  ); */
 })();
