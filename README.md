@@ -1,16 +1,11 @@
-# rest-graphql-grpc
+# REST / GraphQL / gRPC Performance testing
 
-## Load dependencies
+## Set Environment variables
 
-```bash
-npm install
+Create .env file in your root directory and set the environment variables.  
+If no .env file is created the default values are used.
+
 ```
-
-## Environment variables
-
-Create .env in root directory and set environment variables.
-
-```env
 
 GRPC_SERVER_ADDRESS -> default localhost
 GRPC_SERVER_PORT -> default 5000
@@ -25,42 +20,44 @@ REQUEST_COUNT -> default 100
 
 ```
 
-## Server scripts
+## How to run
 
-Start gRPC Server
+### Load dependencies
+
+```bash
+npm install
+```
+
+### Run Server of your choice
 
 ```bash
 npm run grpc-server
-```
 
-Start REST Server
-
-```bash
 npm run rest-server
-```
 
-Start GraphQL Server
-
-```bash
 npm run graphql-server
 ```
 
-## Performance scripts
-
-Start gRPC Performance-Test
+### Run Performance script (works only when the server is running)
 
 ```bash
 npm run grpc-performance
-```
 
-Start REST Performance-Test
-
-```bash
 npm run rest-performance
+
+npm run graphql-performance
 ```
 
-Start GraphQL Performance-Test
+## Result
 
-```bash
-npm run graphql-performance
+After the performance script has run, the results of the various measurements are displayed in the console.
+
+```js
+Performance Test
+{
+  Measure: "What has been measured",
+  Requests: "Number of requests",
+  DurationMs: "Duration in milliseconds",
+  DurationSec: "Duration in seconds"
+}
 ```
