@@ -21,7 +21,7 @@ REST_SERVER_PORT -> default 5001
 GRAPHQL_SERVER_ADDRESS -> default localhost
 GRAPHQL_SERVER_PORT -> default 5002
 
-REQUEST_COUNT -> default 1000
+REQUEST_COUNT -> default 100
 
 ```
 

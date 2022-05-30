@@ -5,7 +5,7 @@ const graphqlClient = require('../client/graphqlClient');
 const { performance, PerformanceObserver } = require('perf_hooks');
 const query = require('./queries');
 
-const REQUEST_COUNT = process.env.REQUEST_COUNT || 1000;
+const REQUEST_COUNT = process.env.REQUEST_COUNT || 100;
 
 const observer = new PerformanceObserver((list) => {
   list.getEntries().forEach((entry) => {

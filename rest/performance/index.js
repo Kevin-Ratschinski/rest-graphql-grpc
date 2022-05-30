@@ -4,7 +4,7 @@ require('dotenv').config();
 const axios = require('axios');
 const { performance, PerformanceObserver } = require('perf_hooks');
 
-let REQUEST_COUNT = process.env.REQUEST_COUNT || 1000;
+let REQUEST_COUNT = process.env.REQUEST_COUNT || 100;
 
 const observer = new PerformanceObserver((list) => {
   list.getEntries().forEach((entry) => {

@@ -5,7 +5,7 @@ const MessageClient = require('../client/MessageClient');
 const { performance, PerformanceObserver } = require('perf_hooks');
 const UserClient = require('../client/UserClient');
 
-let REQUEST_COUNT = process.env.REQUEST_COUNT || 1000;
+let REQUEST_COUNT = process.env.REQUEST_COUNT || 100;
 
 const messageClient = new MessageClient();
 const userClient = new UserClient();
