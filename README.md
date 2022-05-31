@@ -48,6 +48,12 @@ npm run rest-performance
 npm run graphql-performance
 ```
 
+### View REST API documentation (works only when the REST-Server is running)
+
+```
+http://"REST_SERVER_ADDRESS":"REST_SERVER_PORT"/api-docs
+```
+
 ## Result
 
 After the performance script has run, the results of the various measurements are displayed in the console.
