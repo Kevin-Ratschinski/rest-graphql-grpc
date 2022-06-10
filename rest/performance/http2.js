@@ -169,7 +169,6 @@ const performanceRestCreateUser = async (endpoint, description) => {
         });
 
         req.on('end', () => {
-          console.log(res);
           request++;
           client.close();
 
