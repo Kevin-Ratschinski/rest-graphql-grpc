@@ -8,6 +8,8 @@
     "grpc-performance": "node grpc/performance",
     "rest-server": "node rest/server/server.js",
     "rest-performance": "node rest/performance",
+    "rest-server2": "node rest/server/server2.js",
+    "rest-performance2": "node rest/performance/http2.js",
     "graphql-server": "node graphql/server/server.js",
     "graphql-performance": "node graphql/performance"
   },
@@ -33,6 +35,7 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
     "graphql-request": "^4.2.0",
+    "spdy": "^4.0.2",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   },
