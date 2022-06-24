@@ -29,6 +29,10 @@ For the REST HTTP/2 server a private key (private.key) and a certificate (certif
 
 ## How to run
 
+### Preferred Node.js version
+
+v16.14.0 or higher
+
 ### Load dependencies
 
 ```bash
